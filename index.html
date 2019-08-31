@@ -16,25 +16,51 @@
 
   <script type="text/babel">
     function FriendsLists (props) {
+      // We are using arrow functions on onClick to avoid unexpected executions.
       return (
         <ul>
           {props.list.map(
-            name => <li key={name}>{name}</li>
+            name => 
+            <li key={name}>
+              <span>{name}</span>
+              <span onClick={() => props.onRemoveFriend(name)}>X</span>
+            </li>
           )}
         </ul>
       )
     }
     class App extends React.Component {
       constructor(props) {
+        // The super keyword is used to access and call functions on an object's parent.
         super(props)
-        
+
         this.state = {
           friends: ['Maria', 'Josevalda', 'Esmerindo']
         }
+    
+        // The bind() function creates a new bound function,
+        // which is an exotic function object (a term from 
+        // ECMAScript 2015) that wraps the original function 
+        // object. Calling the bound function generally results 
+        // in the execution of its wrapped function.
+        this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
+      }
+      handleAddFriend() {
+
+      }
+      handleRemoveFriend(name) {
+        this.setState((currentState) => {
+          // This will be merged into the current state.
+          return {
+            friends: currentState.friends.filter(friend => friend !== name)
+          }
+        })
       }
       render() {
         return (
-          <FriendsLists list={this.state.friends} />
+          <FriendsLists
+            list={this.state.friends}
+            onRemoveFriend={this.handleRemoveFriend} />
         )
       }
     }
