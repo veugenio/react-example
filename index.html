@@ -24,13 +24,15 @@
         </ul>
       )
     }
-    function App () {
-      const friends = ['Maria', 'Josevalda', 'Esmerindo']
-      return (
-        <FriendsLists list={friends} />
-      )
+    class App extends React.Component {
+      render() {
+        const friends = ['Maria', 'Josevalda', 'Esmerindo']
+        return (
+          <FriendsLists list={friends} />
+        )
+      }
     }
-
+  
     ReactDOM.render(
       <App />,
       document.getElementById('app'))
