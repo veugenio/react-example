@@ -5,30 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>React</title>
+  <!-- https://reactjs.org/docs/cdn-links.html -->
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <!-- https://babeljs.io/setup#installation -->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
   <div id='app'></div>
-  <script>
+  <script type="text/babel">
+
     const name = 'Jose'
     const handle = '@jose'
 
     function NameComponent(props) {
-      return React.createElement('h1', null, props.name)
+      return <h1>{ props.name }</h1>
     }
     function HandleComponent(props) {
-      return React.createElement('h3', null, props.handle)
+      return <h3>{ props.handle }</h3>
     }
 
-    const wrapperElement = React.createElement(
-      'div',
-      { id: 'wrapper' },
-      React.createElement(NameComponent, { name: name }),
-      React.createElement(HandleComponent, { handle: handle })
-    )
+    function App () {
+      return (
+        <div id='container'>
+          <NameComponent name={ name } />
+          <HandleComponent handle='@jose' />
+        </div>
+      )
+    }
 
-    ReactDOM.render(wrapperElement, document.getElementById('app'))
+    ReactDOM.render(
+      <App />,
+      document.getElementById('app'))
   </script>
 </body>
 </html>
